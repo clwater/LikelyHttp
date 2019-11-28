@@ -84,7 +84,7 @@ public abstract class BaseObserver<T> implements Observer<BaseEntity<T>> {
      * 网络请求成功, 状态码错误
      */
     protected void onCodeError(BaseEntity<T> t) throws Exception {
-        baseObserverInterface.onCodeError();
+        baseObserverInterface.onCodeError(t.getCode());
     }
 
 

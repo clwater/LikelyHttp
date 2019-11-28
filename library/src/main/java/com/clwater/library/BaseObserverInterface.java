@@ -9,5 +9,5 @@ public interface BaseObserverInterface {
     //请求完成
     void onRequestEnd();
     //请求异常
-    void onCodeError();
+    void onCodeError(int errorCode);
 }
