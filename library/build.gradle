@@ -2,14 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-version = "0.0.1"
 
 android {
 
-    resourcePrefix "clwater_" //随意填写
-
     compileSdkVersion 28
-
 
     defaultConfig {
         minSdkVersion 23
@@ -58,12 +54,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
-//    api files('libs\\adapter-rxjava2-2.5.0.jar')
-//    api files('libs\\converter-gson-2.5.0.jar')
-//    api files('libs\\logging-interceptor-3.8.1.jar')
-//    api files('libs\\okhttp-3.11.0.jar')
-//    api files('libs\\retrofit-2.5.0.jar')
-//    api files('libs\\rxjava-2.2.8.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -84,10 +74,10 @@ apply plugin: 'com.jfrog.bintray'
 
 //以下是需要针对项目需要修改的配置内容
 //发布者的组织名称
-group = "com.clwater"
+group = "com.clwater.likely"
 // 版本号，下次更新是只需要更改版本号即可
 version = "0.0.1"
-//上面配置后上传至bintray后的编译路径是这样的： compile 'com.clwater:bintraylibrary:0.0.1'
+//上面配置后上传至bintray后的编译路径是这样的： compile 'com.clwater.likely:library:0.0.1'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -101,13 +91,13 @@ def siteUrl = 'https://github.com/clwater/BintrayLibrary'
 //项目的版本控制地址
 def gitUrl = 'https://github.com/clwater/BintrayLibrary.git'
 //发布到JCenter上的项目名字，必须填写
-def libName = "testlibrary2"
+def libName = "LikelyHttp"
 //文档连接
 def javaDocLinks = "https://github.com/clwater"
 //Bintray中Repository的名字
 def bintrayRepo = "maven"
 //应用的描述
-def bintrayDesc = "Desc"
+def bintrayDesc = "A very brief android network request packaging library"
 //组织的名字, 建立组织账号后上传的时候需要这个, 个人张海时候不需要修改这部分
 //def bintrayUserOrg = "clwater-vhop"
 
@@ -154,8 +144,8 @@ install {
             project {
                 packaging 'aar'
                 //项目名称和描述
-                name 'pom project name'
-                description 'pom project escription'
+                name 'LikelyLibrary'
+                description 'A very brief android network request packaging library'
                 url siteUrl
                 licenses {
                     license {
@@ -167,9 +157,9 @@ install {
                 developers {
                     //开发者的个人信息
                     developer {
-                        id 'developer id '
-                        name 'developer name '
-                        email 'developer email'
+                        id 'clwater'
+                        name 'clwater'
+                        email 'gengzhibo@gengzhibo.net'
                     }
                 }
                 scm {
