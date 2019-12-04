@@ -13,6 +13,18 @@ import retrofit2.http.Query;
 public interface BaseNetApi {
 
     @GET("clwater")
-    Observable<BaseEntity<String>> getHome();
+    Observable<BaseEntity<String>> getSuccess();
+
+    @GET("clwater")
+    Observable<BaseEntity<String>> getFail();
+
+    @GET("clwater")
+    Observable<BaseEntity<String>> getCodeFail();
+
+    @GET("clwater")
+    Observable<BaseEntity<String>> postMethod();
+
+    @GET("clwater")
+    Observable<BaseEntity<String>> returnInIO();
 
 }

@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    BaseNetApi baseNetApi;
+    private BaseNetApi baseNetApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +30,38 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.get_success).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                test();
+                getSuccess();
+            }
+        });
+
+        findViewById(R.id.get_fail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFail();
+            }
+        });
+
+        findViewById(R.id.get_code_fail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCodeFail();
+            }
+        });
+
+        findViewById(R.id.post).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postMethod();
+            }
+        });
+
+        findViewById(R.id.inio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                returnInIO();
             }
         });
     }
@@ -51,15 +79,13 @@ public class MainActivity extends AppCompatActivity {
                 .client(mOkHttpClient)
                 .build();
         baseNetApi = mRetrofit.create(BaseNetApi.class);
-    }
 
-    private void test() {
-
+        //请求统一处理
+        //包含请求开始,完成,请求状态码异常
         LikelyHttp.getInstance().setUniteDeal(new BaseObserverInterface() {
             @Override
             public void onRequestStart() {
                 Toast.makeText(MainActivity.this, "onRequestStart", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -71,9 +97,14 @@ public class MainActivity extends AppCompatActivity {
             public void onCodeError(int errorCode) {
                 Toast.makeText(MainActivity.this, "onCodeError: " + errorCode, Toast.LENGTH_SHORT).show();
             }
-        });
+        })
+        //设置数据成功状态码(毕竟有的人一定要用0做成功的返回码)
+        .setSuccessCode(200);
 
-        LikelyHttp.getInstance().start(baseNetApi.getHome(), new BaseObserver<String>(){
+    }
+
+    private void getSuccess() {
+        LikelyHttp.getInstance().start(baseNetApi.getSuccess(), new BaseObserver<String>(){
             @Override
             protected void onSuccees(BaseEntity<String> t) throws Exception {
                 Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
@@ -84,7 +115,63 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+
+    private void getFail() {
+        LikelyHttp.getInstance().start(baseNetApi.getFail(), new BaseObserver<String>(){
+            @Override
+            protected void onSuccees(BaseEntity<String> t) throws Exception {
+                Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+                Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getCodeFail() {
+        LikelyHttp.getInstance().start(baseNetApi.getCodeFail(), new BaseObserver<String>(){
+            @Override
+            protected void onSuccees(BaseEntity<String> t) throws Exception {
+                Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+                Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void postMethod() {
+        LikelyHttp.getInstance().start(baseNetApi.getSuccess(), new BaseObserver<String>(){
+            @Override
+            protected void onSuccees(BaseEntity<String> t) throws Exception {
+                Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+                Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void returnInIO() {
+        LikelyHttp.getInstance().start(baseNetApi.getSuccess(), new BaseObserver<String>(){
+            @Override
+            protected void onSuccees(BaseEntity<String> t) throws Exception {
+                Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+                Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
