@@ -3,6 +3,7 @@ package com.clwater.likelyhttp;
 import com.clwater.library.BaseEntity;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -12,19 +13,19 @@ import retrofit2.http.Query;
  */
 public interface BaseNetApi {
 
-    @GET("clwater")
-    Observable<BaseEntity<String>> getSuccess();
+    @GET("getSuccess")
+    Observable<BaseEntity<Object>> getSuccess();
 
-    @GET("clwater")
+    @GET("getFail")
     Observable<BaseEntity<String>> getFail();
 
-    @GET("clwater")
+    @GET("getCodeFail")
     Observable<BaseEntity<String>> getCodeFail();
 
-    @GET("clwater")
+    @POST("postMethod")
     Observable<BaseEntity<String>> postMethod();
 
-    @GET("clwater")
-    Observable<BaseEntity<String>> returnInIO();
+    @GET("returnInIO")
+    Observable<BaseEntity<Object>> returnInIO();
 
 }

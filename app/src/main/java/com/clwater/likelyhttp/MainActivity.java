@@ -1,5 +1,6 @@
 package com.clwater.likelyhttp;
 
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,7 +91,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onRequestEnd() {
-                Toast.makeText(MainActivity.this, "onRequestEnd", Toast.LENGTH_SHORT).show();
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "onRequestEnd", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -104,15 +110,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getSuccess() {
-        LikelyHttp.getInstance().start(baseNetApi.getSuccess(), new BaseObserver<String>(){
+        LikelyHttp.getInstance().start(baseNetApi.getSuccess(), new BaseObserver<Object>(){
             @Override
-            protected void onSuccees(BaseEntity<String> t) throws Exception {
+            protected void onSuccees(BaseEntity<Object> t) throws Exception {
                 Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
-                Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "onFailure" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -147,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void postMethod() {
-        LikelyHttp.getInstance().start(baseNetApi.getSuccess(), new BaseObserver<String>(){
+        LikelyHttp.getInstance().start(baseNetApi.postMethod(), new BaseObserver<String>(){
             @Override
             protected void onSuccees(BaseEntity<String> t) throws Exception {
                 Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
@@ -161,17 +167,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void returnInIO() {
-        LikelyHttp.getInstance().start(baseNetApi.getSuccess(), new BaseObserver<String>(){
+        Thread thread = Looper.getMainLooper().getThread();
+        Toast.makeText(MainActivity.this, "Main Thread: " + thread.getName(), Toast.LENGTH_SHORT).show();
+
+        LikelyHttp.getInstance().start(baseNetApi.returnInIO(), new BaseObserver<Object>(){
             @Override
-            protected void onSuccees(BaseEntity<String> t) throws Exception {
-                Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
+            protected void onSuccees(BaseEntity<Object> t) throws Exception {
+                final Thread thread = Thread.currentThread();
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "onSuccees", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "return thread: " + thread.getName(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
 
             @Override
             protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
                 Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
             }
-        });
+        }, true);
     }
 
 
