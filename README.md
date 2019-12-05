@@ -94,32 +94,32 @@ public interface BaseNetApi {
 
 模拟最简单的get success请求
 
-![简单get请求](https://user-gold-cdn.xitu.io/2019/12/6/16ed6cadc8c853dd?w=1024&h=2163&f=gif&s=1079003)
+![简单get请求](https://update-image.oss-cn-shanghai.aliyuncs.com/macUpload/1.gif)
 
 2. 简单get请求(失败)
 
 模拟最简单的get fail请求
 
-![简单getfail请求](https://user-gold-cdn.xitu.io/2019/12/6/16ed6cadc59da66f?w=1024&h=2163&f=gif&s=932539)
+![简单getfail请求](https://update-image.oss-cn-shanghai.aliyuncs.com/macUpload/2.gif)
 
 3. 服务器返回状态码错误的情况(统一处理)
 
 模拟服务器返回状态码错误的情况
 
-![简单codeerror请求](https://user-gold-cdn.xitu.io/2019/12/6/16ed6cadc8ca4f3a?w=1024&h=2163&f=gif&s=330080)
+![简单codeerror请求](https://update-image.oss-cn-shanghai.aliyuncs.com/macUpload/3.gif)
 
 
 4. 简单的post请求
 
 模拟简单的post请求
 
-![简单post请求](https://user-gold-cdn.xitu.io/2019/12/6/16ed6cadd237505e?w=1024&h=2163&f=gif&s=935163)
+![简单post请求](https://update-image.oss-cn-shanghai.aliyuncs.com/macUpload/4.gif)
 
 4. 异步线程回调模拟
 
 模拟异步线程回调模拟
 
-![io](https://user-gold-cdn.xitu.io/2019/12/6/16ed6cadca174625?w=1024&h=2163&f=gif&s=1181851)
+![io](https://update-image.oss-cn-shanghai.aliyuncs.com/macUpload/5.gif)
 
 
 
