@@ -60,6 +60,8 @@ public abstract class BaseObserver<T> implements Observer<BaseEntity<T>> {
     @Override
     public void onError(Throwable e) {
         onRequestEnd();
+        baseObserverInterface.onCodeError(-1, e.getMessage());
+
         try {
             if (e instanceof ConnectException
                     || e instanceof TimeoutException
@@ -84,7 +86,7 @@ public abstract class BaseObserver<T> implements Observer<BaseEntity<T>> {
      * 网络请求成功, 状态码错误
      */
     protected void onCodeError(BaseEntity<T> t) throws Exception {
-        baseObserverInterface.onCodeError(t.getCode());
+        baseObserverInterface.onCodeError(t.getCode(), t.getMsg());
     }
 
 
